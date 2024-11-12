@@ -2,6 +2,8 @@ from flask import Flask, request, render_template
 from random import choice
 
 
+
+
 WORDS = ["apple", "maple", "Pneumonoultramicroscopicsilicovolcanoconiosis", "hello"]
 
 # secret_word = choice(WORDS).upper()\

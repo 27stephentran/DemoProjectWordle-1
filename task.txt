@@ -1,0 +1,8 @@
+For the main tasks:
+Add more words using the SQL Query (at least have 50 words).
+Make a function to Query all the words and replace it with list that we have right now for the main.py
+Make a temporary SQL Query to add the values into the leaderboard Table.
+For the extra tasks:
+Design the index.html as well as to put more content into the wordle_page.html
+Try and make a Table for the leaderboard to be shown in a new page (name the page with the right method).
+This will be their homework for this week, if they have any question about the task either you can ask them to take a look at M6L4.Structure of a database eng and their task 8, they already have everything down and just need to modify the command/queries.

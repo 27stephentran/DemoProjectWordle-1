@@ -1,7 +1,8 @@
 import sqlite3
+
 db_name = 'wordle.db'
 conn = None
-curor = None
+cursor = None
 
 def open():
     global conn, cursor
@@ -18,19 +19,18 @@ def do(query):
 
 def make_table():
     open()
-    do('''PRAGMA foriegn_key=on''')
-    do('''
-    CREATE TABLE IF NOT EXISTS wordle (
-        id INTERGER PRIMARY KEY AUTOINCREMENT,
-        words VARCHAR)''')
+    do('''PRAGMA foreign_keys=on''')
+
+    do('''CREATE TABLE IF NOT EXISTS wordle (
+       id INTEGER PRIMARY KEY AUTOINCREMENT,
+       words VARCHAR)''')
     
-    do('''
-    CREATE TABLE IF NOT EXISTS leaderboard (
-        id INTERGER PRIMARY KEY AUTOINCREMENT,
-        words VARCHAR,
-        attemps INTERGER,
-        word_id INTERGER,
-        FORIEGN KEY (word_id) REFERENCES wordle (id))''')
+    do('''CREATE TABLE IF NOT EXISTS leaderboard ( 
+       id INTEGER PRIMARY KEY AUTOINCREMENT, 
+       name VARCHAR, 
+       attempts INTEGER, 
+       word_id INTEGER, 
+       FOREIGN KEY (word_id) REFERENCES wordle (id))''')
     close()
 
 def add_words():
@@ -88,11 +88,8 @@ def add_words():
              ('notion',),
              ('dancer',),
              ('guity',)]
-             
-    
-            
-
-    cursor.executemany('INSERT INTO worlde (words) VALUE (?)', words)
+        
+    cursor.executemany('INSERT INTO wordle (words) VALUES (?)', words)
     conn.commit()
     close()
 
@@ -103,13 +100,15 @@ def get_words():
     close()
     return wordle_data
 
-def leaderboard():
+
+def get_player():
     open()
     cursor.execute('SELECT * FROM leaderboard')
     leaderboard_data = cursor.fetchall()
+    close()
     return leaderboard_data
-    
-def main_database():
+
+def make_datebase():
     make_table()
     add_words()
 

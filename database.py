@@ -20,13 +20,13 @@ def make_table():
     open()
     do('''PRAGMA foriegn_key=on''')
     do('''
-    CREATE TABLE IF NOT EXIST wordle (
-        id INTERGER PRIMARY KEY,
+    CREATE TABLE IF NOT EXISTS wordle (
+        id INTERGER PRIMARY KEY AUTOINCREMENT,
         words VARCHAR)''')
     
     do('''
-    CREATE TABLE IF NOT EXIST leaderboard (
-        id INTERGER PRIMARY KEY,
+    CREATE TABLE IF NOT EXISTS leaderboard (
+        id INTERGER PRIMARY KEY AUTOINCREMENT,
         words VARCHAR,
         attemps INTERGER,
         word_id INTERGER,
@@ -87,9 +87,34 @@ def add_words():
              ('amount',),
              ('notion',),
              ('dancer',),
-             ('guity'),]
+             ('guity',)]
              
     
+            
+
     cursor.executemany('INSERT INTO worlde (words) VALUE (?)', words)
     conn.commit()
+    close()
+
+def get_words():
+    open()
+    cursor.execute('SELECT * FROM wordle')
+    wordle_data = cursor.fetchall()
+    close()
+    return wordle_data
+
+def leaderboard():
+    open()
+    cursor.execute('SELECT * FROM leaderboard')
+    leaderboard_data = cursor.fetchall()
+    return leaderboard_data
+    
+def main_database():
+    make_table()
+    add_words()
+
+def add_player(name, attemps, word_id):
+    open()
+    cursor.execute("INSERT INTO leaderboard (name, attempts, word_id) VALUES (?,?,?)", (name, attemps, word_id))
+    print(f"The player: {name}, takes {attemps} attemps to finish this {word_id} word")
     close()

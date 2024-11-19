@@ -3,18 +3,19 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link ref="stylesheet" href="{{ url_for('static', filename = 'style.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css')}}">
         <title>Wordle Game Demo</title>
     </head>
     <body>
         <h1>Wordle Game</h1>
         <form method="POST" id="world-form">
+            <input type = "text" name = "name_input" id = "name_input" placeholder="Enter Your Name">
             <div class="letter-boxes">
                 {% for i in range(word_length) %}
                     <input type="text" name="letter{{i+1}}" value="{{guess[i]}}" maxlenght = "1" required class="letter-input">
                 {% endfor %}
             </div>
-            <button type="submit">Submit</button>       
+            <button type="submit" id = "submit" name ="submit">Check</button>       
         </form>
         {% if feedback %}
             <div class="feedback">
@@ -33,5 +34,8 @@
                 <p>{{error}}</p>
             </div>
         {% endif %}
+        
+
+
     </body>
 </html>

@@ -117,3 +117,11 @@ def add_player(name, attemps, word_id):
     cursor.execute("INSERT INTO leaderboard (name, attempts, word_id) VALUES (?,?,?)", (name, attemps, word_id))
     print(f"The player: {name}, takes {attemps} attemps to finish this {word_id} word")
     close()
+
+def get_leaderboard(word_id):
+    open()
+    command = f"SELECT * FROM leaderboard WHERE word_id = {word_id} ORDER BY attempts ASC"
+    cursor.execute(command)
+    leaderboard = cursor.fetchall()
+    close()
+    return leaderboard
